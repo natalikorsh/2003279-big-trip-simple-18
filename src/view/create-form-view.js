@@ -1,8 +1,6 @@
 import {createElement} from '../render.js';
 
-const createFormTemplate = () => (
-  `<ul class="trip-events__list"></ul>`
-);
+const createFormTemplate = () => '<ul class="trip-events__list"></ul>';
 
 export default class CreateFormView {
   getTemplate() {

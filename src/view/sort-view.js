@@ -27,7 +27,7 @@ const createSortTemplate = () => (
       <label class="trip-sort__btn" for="sort-offer">Offers</label>
     </div>
   </form>`
-)
+);
 
 export default class SortView {
   getTemplate() {

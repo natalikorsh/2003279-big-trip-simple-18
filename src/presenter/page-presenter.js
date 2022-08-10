@@ -17,5 +17,5 @@ export default class PagePresenter {
     for (let i = 0; i < 3; i++) {
       render(new RoutePointView, this.pageForm.getElement());
     }
-  }
+  };
 }
