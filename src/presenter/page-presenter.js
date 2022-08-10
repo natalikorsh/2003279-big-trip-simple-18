@@ -1,8 +1,8 @@
-import CreateFormView from "../view/create-form-view";
-import EditFormView from "../view/edit-form-view";
-import RoutePointView from "../view/route-point-view";
-import SortView from "../view/sort-view";
-import { render } from "../render";
+import CreateFormView from '../view/create-form-view';
+import EditFormView from '../view/edit-form-view';
+import RoutePointView from '../view/route-point-view';
+import SortView from '../view/sort-view';
+import { render } from '../render';
 
 export default class PagePresenter {
   pageForm = new CreateFormView();

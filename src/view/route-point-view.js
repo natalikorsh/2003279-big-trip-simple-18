@@ -1,4 +1,4 @@
-import {createElement} from "../render.js";
+import {createElement} from '../render.js';
 
 const routePointViewTemplate = () => (
   `<li class="trip-events__item">
