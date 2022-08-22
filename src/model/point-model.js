@@ -1,4 +1,4 @@
-import { generatePoint, destinations, offersByType } from "../mock/point.js";
+import { generatePoint, destinations, offersByType } from '../mock/point.js';
 
 export default class PointsModel {
   get() {

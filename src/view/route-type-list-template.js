@@ -48,4 +48,4 @@ export const routeTypesList =
         <label class="event__type-label  event__type-label--restaurant" for="event-type-restaurant-1">Restaurant</label>
       </div>
     </fieldset>
-  </div>`
+  </div>`;

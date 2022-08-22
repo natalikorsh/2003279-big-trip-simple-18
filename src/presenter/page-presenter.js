@@ -1,6 +1,5 @@
 import CreateListView from '../view/create-list-view.js';
 import CreateFormView from '../view/create-form-view.js';
-import EditFormView from '../view/edit-form-view.js';
 import RoutePointView from '../view/route-point-view.js';
 import SortView from '../view/sort-view.js';
 import { render } from '../render.js';
@@ -12,8 +11,6 @@ export default class PagePresenter {
     this.pageContainer = pageContainer;
     this.pointsModel = pointsModel;
     this.routePoints = [...this.pointsModel.get()];
-
-    console.log(this.routePoints);
 
     render(new SortView(), this.pageContainer);
     render(this.pageList, this.pageContainer);

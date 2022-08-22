@@ -14,8 +14,6 @@ const createRoutePointTemplate = (point) => {
 
   const cityName = destination.cityName;
 
-
-
   return (
     `<li class="trip-events__item">
       <div class="event">
@@ -51,11 +49,8 @@ const createRoutePointTemplate = (point) => {
         </button>
       </div>
     </li>`
-  )
-}
-
-
-
+  );
+};
 
 export default class RoutePointView {
   constructor(point) {

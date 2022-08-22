@@ -53,23 +53,23 @@ export const destinations = [
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet varius magna, non porta ligula feugiat eget. Fusce tristique felis at fermentum pharetra. Aliquam id orci ut lectus varius viverra.',
     pictures: [
       {
-        'src': `http://picsum.photos/300/200?r=0.093756202`,
+        'src': 'http://picsum.photos/300/200?r=0.093756202',
         'description': 'Chamonix parliament building'
       },
       {
-        'src': `http://picsum.photos/300/200?r=0.093356202`,
+        'src': 'http://picsum.photos/300/200?r=0.093356202',
         'description': 'Chamonix parliament building'
       },
       {
-        'src': `http://picsum.photos/300/200?r=0.099378939202`,
+        'src': 'http://picsum.photos/300/200?r=0.099378939202',
         'description': 'Chamonix parliament building'
       },
       {
-        'src': `http://picsum.photos/300/200?r=0.093773890202`,
+        'src': 'http://picsum.photos/300/200?r=0.093773890202',
         'description': 'Chamonix parliament building'
       },
       {
-        'src': `http://picsum.photos/300/200?r=0.093226202`,
+        'src': 'http://picsum.photos/300/200?r=0.093226202',
         'description': 'Chamonix parliament building'
       },
     ]
@@ -85,8 +85,3 @@ export const generatePoint = () => ({
   basePrice: 100,
   offers: offersByType,
 });
-
-
-
-
-
