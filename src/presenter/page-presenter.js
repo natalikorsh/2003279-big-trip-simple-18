@@ -20,8 +20,6 @@ export default class PagePresenter {
     this.#pointsModel = pointsModel;
     this.#routePoints = [...this.#pointsModel.points];
 
-
-
     if (this.#routePoints.length === 0) {
       render(new LoadingView(), this.#pageContainer);
     } else {
