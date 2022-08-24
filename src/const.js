@@ -5,4 +5,4 @@ export const BLANK_FORM = {
   dateTo: '',
   basePrice: '',
   offers: [],
-}
+};

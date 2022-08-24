@@ -3,7 +3,7 @@ import RoutePointView from '../view/route-point-view.js';
 import SortView from '../view/sort-view.js';
 import EditFormView from '../view/edit-form-view.js';
 import LoadingView from '../view/loading-view.js';
-import { render, replace, remove } from '../framework/render.js';
+import { render, replace } from '../framework/render.js';
 
 export default class PagePresenter {
   #pageContainer = null;

@@ -128,5 +128,5 @@ export default class EditFormView extends AbstractView {
   #formResetHandler = (evt) => {
     evt.preventDefault();
     this._callback.formReset();
-  }
+  };
 }

@@ -58,11 +58,11 @@ export default class RoutePointView extends AbstractView {
   constructor(point) {
     super();
     this.#point = point;
-  };
+  }
 
   get template() {
     return createRoutePointTemplate(this.#point);
-  };
+  }
 
   setPointExpandHandler = (callback) => {
     this._callback.expand = callback;
@@ -71,6 +71,6 @@ export default class RoutePointView extends AbstractView {
 
   #expandHandler = () => {
     this._callback.expand();
-  }
+  };
 }
 

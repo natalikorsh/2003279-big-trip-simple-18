@@ -2,8 +2,6 @@ import AbstractView from '../framework/view/abstract-view.js';
 import { humanizeFormDate } from '../utils.js';
 import { routeTypesList } from './route-type-list-template.js';
 
-
-
 const createFormTemplate = (point) => {
   const {type, destination, dateFrom, dateTo, offers, basePrice} = point;
 
@@ -103,6 +101,7 @@ export default class CreateFormView extends AbstractView {
   #point = null;
 
   constructor(point) {
+    super();
     this.#point = point;
   }
 
