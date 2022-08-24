@@ -1,4 +1,4 @@
-import {createElement} from '../render.js';
+import AbstractView from '../framework/view/abstract-view.js';
 import { humanizePointDate, humanizePointTime, robotizeDate, robotizeDateAndTime } from '../utils.js';
 
 
@@ -52,28 +52,25 @@ const createRoutePointTemplate = (point) => {
   );
 };
 
-export default class RoutePointView {
-  #element = null;
+export default class RoutePointView extends AbstractView {
   #point = null;
 
   constructor(point) {
+    super();
     this.#point = point;
-  }
+  };
 
   get template() {
     return createRoutePointTemplate(this.#point);
-  }
+  };
 
-  get element() {
-    if (!this.#element) {
-      this.#element = createElement(this.template);
-    }
+  setPointExpandHandler = (callback) => {
+    this._callback.expand = callback;
+    this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#expandHandler);
+  };
 
-    return this.#element;
-  }
-
-  removeElement() {
-    this.#element = null;
+  #expandHandler = () => {
+    this._callback.expand();
   }
 }
 

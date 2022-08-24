@@ -1,16 +1,14 @@
 import CreateListView from '../view/create-list-view.js';
-import CreateFormView from '../view/create-form-view.js';
 import RoutePointView from '../view/route-point-view.js';
 import SortView from '../view/sort-view.js';
 import EditFormView from '../view/edit-form-view.js';
 import LoadingView from '../view/loading-view.js';
-import { render } from '../render.js';
+import { render, replace, remove } from '../framework/render.js';
 
 export default class PagePresenter {
   #pageContainer = null;
   #pointsModel = null;
   #pageList = new CreateListView();
-  #createFormComponent = new CreateFormView();
   #routePoints = [];
 
   #renderedPointCount = 5;
@@ -23,8 +21,8 @@ export default class PagePresenter {
     if (this.#routePoints.length === 0) {
       render(new LoadingView(), this.#pageContainer);
     } else {
-      render(this.#pageList, this.#pageContainer);
       render(new SortView(), this.#pageContainer);
+      render(this.#pageList, this.#pageContainer);
       for (let i = 0; i < this.#routePoints.length; i++) {
         this.#renderRoute(this.#routePoints[i]);
       }
@@ -36,11 +34,11 @@ export default class PagePresenter {
     const editFormComponent = new EditFormView(point);
 
     const replacePointToEditForm = () => {
-      this.#pageList.element.replaceChild(editFormComponent.element, routeComponent.element);
+      replace(editFormComponent, routeComponent);
     };
 
     const replaceEditFormToPoint = () => {
-      this.#pageList.element.replaceChild(routeComponent.element, editFormComponent.element);
+      replace(routeComponent, editFormComponent);
     };
 
     const onEscKeyDown = (evt) => {
@@ -51,19 +49,18 @@ export default class PagePresenter {
       }
     };
 
-    routeComponent.element.querySelector('.event__rollup-btn').addEventListener('click', () => {
+    routeComponent.setPointExpandHandler(() => {
       replacePointToEditForm();
       document.addEventListener('keydown', onEscKeyDown);
     });
 
-    editFormComponent.element.querySelector('.event__save-btn').addEventListener('click', (evt) => {
-      evt.preventDefault();
+    editFormComponent.setFormSubmitHandler(() => {
       replaceEditFormToPoint();
       document.removeEventListener('keydown', onEscKeyDown);
     });
 
-    editFormComponent.element.querySelector('.event__reset-btn').addEventListener('click', (evt) => {
-      evt.preventDefault();
+
+    editFormComponent.setFormResetHandler(() => {
       replaceEditFormToPoint();
       document.removeEventListener('keydown', onEscKeyDown);
     });
