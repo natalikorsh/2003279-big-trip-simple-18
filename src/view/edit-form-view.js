@@ -1,4 +1,4 @@
-import {createElement} from '../render.js';
+import AbstractView from '../framework/view/abstract-view.js';
 import { humanizeFormDate } from '../utils.js';
 import { routeTypesList } from './route-type-list-template.js';
 
@@ -98,11 +98,11 @@ const createEditFormTemplate = (point) => {
 };
 
 
-export default class EditFormView {
-  #element = null;
+export default class EditFormView extends AbstractView {
   #point = null;
 
   constructor(point) {
+    super();
     this.#point = point;
   }
 
@@ -110,15 +110,23 @@ export default class EditFormView {
     return createEditFormTemplate(this.#point);
   }
 
-  get element() {
-    if (!this.#element) {
-      this.#element = createElement(this.template);
-    }
+  setFormSubmitHandler = (callback) => {
+    this._callback.formSubmit = callback;
+    this.element.querySelector('form').addEventListener('submit', this.#formSubmitHandler);
+  };
 
-    return this.#element;
-  }
+  #formSubmitHandler = (evt) => {
+    evt.preventDefault();
+    this._callback.formSubmit();
+  };
 
-  removeElement() {
-    this.#element = null;
-  }
+  setFormResetHandler = (callback) => {
+    this._callback.formReset = callback;
+    this.element.querySelector('form').addEventListener('reset', this.#formResetHandler);
+  };
+
+  #formResetHandler = (evt) => {
+    evt.preventDefault();
+    this._callback.formReset();
+  };
 }
