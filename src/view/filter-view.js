@@ -27,12 +27,10 @@ export default class FilterView extends AbstractView {
     this.value = value;
     this.checked = checked;
   }
-  
   // setFilterCheckedHandler = (callback) => {
   //   this._callback.filterApply() = callback;
   //   this.element.querySelector('trip-filters__filter-input').addEventListener('change', this.#filterCheckedHandler);
   // }
-
   // #filterCheckedHandler = (evt) => {
   //   evt.preventDefault();
   //   this.eventName = evt.target.value;

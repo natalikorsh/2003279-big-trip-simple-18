@@ -1,7 +1,6 @@
-import { getRandomInteger } from "../utils/utils";
-import { ROUTE_TYPES } from "../const";
-import { nanoid } from "nanoid";
-import dayjs from "dayjs";
+import { getRandomInteger } from '../utils/utils.js';
+import { ROUTE_TYPES } from '../const.js';
+import { nanoid } from 'nanoid';
 
 export const generateOffersByType = (type) => {
   const offersByType = [
@@ -220,7 +219,7 @@ const generateDestinationById = (id) => {
   ];
 
   return destinations.find((destination) => destination.id === id);
-}
+};
 
 // const generateDate = () => {
 //   const isDate = Boolean(getRandomInteger(0, 1));
@@ -236,7 +235,7 @@ const generateDestinationById = (id) => {
 const generateType = () => {
   const randomIndex = getRandomInteger(0, ROUTE_TYPES.length - 1);
   return ROUTE_TYPES[randomIndex];
-}
+};
 
 export const generatePoint = () => {
   const id = 1;

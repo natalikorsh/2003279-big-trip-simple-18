@@ -5,7 +5,7 @@ import EditFormView from '../view/edit-form-view.js';
 const mode = {
   DEFAULT: 'DEFAULT',
   EDITING: 'EDITING',
-}
+};
 
 export default class PointPresenter {
   #routePointsContainer = null;

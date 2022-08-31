@@ -137,5 +137,5 @@ export default class EditFormView extends AbstractView {
   #rollupHandler = (evt) => {
     evt.preventDefault();
     this._callback.rollup();
-  }
+  };
 }

@@ -16,5 +16,7 @@ export const ROUTE_TYPES = [
 ];
 
 export const SortType = {
-  
-}
+  DEFAULT: 'default',
+  DATE_UP: 'date-up',
+  PRICE_DOWN: 'price-down',
+};

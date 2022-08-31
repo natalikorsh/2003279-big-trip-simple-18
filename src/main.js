@@ -1,6 +1,4 @@
-import FilterView from './view/filter-view.js';
 import RoutePresenter from './presenter/route-presenter';
-import { render } from './framework/render.js';
 import PointsModel from './model/point-model.js';
 
 const routeFilterContainer = document.querySelector('.trip-controls__filters');
