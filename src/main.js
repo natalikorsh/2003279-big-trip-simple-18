@@ -1,13 +1,11 @@
-import FilterView from './view/filter-view.js';
-import PagePresenter from './presenter/page-presenter.js';
-import { render } from './framework/render.js';
+import RoutePresenter from './presenter/route-presenter';
 import PointsModel from './model/point-model.js';
 
-const pageFilterElement = document.querySelector('.trip-controls__filters');
-const pageMainSection = document.querySelector('.trip-events');
-const pagePresenter = new PagePresenter();
+const routeFilterContainer = document.querySelector('.trip-controls__filters');
+const routeContainer = document.querySelector('.trip-events');
 const pointsModel = new PointsModel();
 
-render(new FilterView(), pageFilterElement);
+const routePresenter = new RoutePresenter(routeContainer, pointsModel, routeFilterContainer);
 
-pagePresenter.init(pageMainSection, pointsModel);
+
+routePresenter.init();

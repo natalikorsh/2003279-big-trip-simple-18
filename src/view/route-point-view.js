@@ -1,9 +1,8 @@
 import AbstractView from '../framework/view/abstract-view.js';
-import { humanizePointDate, humanizePointTime, robotizeDate, robotizeDateAndTime } from '../utils.js';
-
+import { humanizePointDate, humanizePointTime, robotizeDate, robotizeDateAndTime } from '../utils/utils.js';
 
 const createRoutePointTemplate = (point) => {
-  const {type, dateFrom, dateTo, destination, basePrice, offers} = point;
+  const {type, dateFrom, dateTo, cityName, basePrice, offers} = point;
 
   const dateStart = humanizePointDate(dateFrom);
   const timeStart = humanizePointTime(dateFrom);
@@ -11,8 +10,6 @@ const createRoutePointTemplate = (point) => {
   const dateForRobots = robotizeDate(dateFrom);
   const startDateAndTimeForRobots = robotizeDateAndTime(dateFrom);
   const endDateAndTimeForRobots = robotizeDateAndTime(dateTo);
-
-  const cityName = destination.cityName;
 
   return (
     `<li class="trip-events__item">

@@ -13,5 +13,18 @@ const humanizePointTime = (date) => dayjs(date).format('HH:mm');
 const robotizeDate = (date) => dayjs(date).format('YYYY-MM-DD');
 const robotizeDateAndTime = (date) => dayjs(date).format('YYYY-MM-DDTHH:mm');
 
-export {getRandomInteger, humanizeFormDate, humanizePointDate, humanizePointTime, robotizeDate, robotizeDateAndTime};
+const updateItem = (items, update) => {
+  const index = items.findIndex((item) => item.id === update.id);
+  if (index === -1) {
+    return items;
+  }
+
+  return [
+    ...items.slice(0, index),
+    update,
+    ...items.slice(index + 1),
+  ];
+};
+
+export {getRandomInteger, humanizeFormDate, humanizePointDate, humanizePointTime, robotizeDate, robotizeDateAndTime, updateItem};
 

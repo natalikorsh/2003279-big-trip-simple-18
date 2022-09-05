@@ -16,8 +16,25 @@ const createFilterTemplate = () => (
   </form>`
 );
 
-export default class FilterView extends AbstractView{
+export default class FilterView extends AbstractView {
   get template() {
     return createFilterTemplate();
   }
+
+  setFilterValue (event) {
+    const { value, checked } = event.target;
+
+    this.value = value;
+    this.checked = checked;
+  }
+  // setFilterCheckedHandler = (callback) => {
+  //   this._callback.filterApply() = callback;
+  //   this.element.querySelector('trip-filters__filter-input').addEventListener('change', this.#filterCheckedHandler);
+  // }
+  // #filterCheckedHandler = (evt) => {
+  //   evt.preventDefault();
+  //   this.eventName = evt.target.value;
+  //   this._callback.filterApply(this.eventName);
+  // }
 }
+

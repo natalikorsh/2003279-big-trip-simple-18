@@ -1,8 +1,22 @@
-export const BLANK_FORM = {
-  type: '',
-  destination: '',
-  dateFrom: '',
-  dateTo: '',
-  basePrice: '',
-  offers: [],
+export const FilterType = {
+  EVERYTHING: 'everything',
+  FUTURE: 'future',
+};
+
+export const ROUTE_TYPES = [
+  'taxi',
+  'flight',
+  'bus',
+  'train',
+  'ship',
+  'drive',
+  'check-in',
+  'sightseeing',
+  'restaurant'
+];
+
+export const SortType = {
+  DEFAULT: 'default',
+  DATE_UP: 'date-up',
+  PRICE_DOWN: 'price-down',
 };

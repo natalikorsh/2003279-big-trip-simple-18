@@ -1,5 +1,5 @@
 import AbstractView from '../framework/view/abstract-view.js';
-import { humanizeFormDate } from '../utils.js';
+import { humanizeFormDate } from '../utils/utils.js';
 import { routeTypesList } from './route-type-list-template.js';
 
 const createFormTemplate = (point) => {

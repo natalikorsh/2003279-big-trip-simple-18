@@ -1,20 +1,16 @@
 import AbstractView from '../framework/view/abstract-view.js';
-import { humanizeFormDate } from '../utils.js';
+import { humanizeFormDate } from '../utils/utils.js';
 import { routeTypesList } from './route-type-list-template.js';
 
 
 const createEditFormTemplate = (point) => {
-  const {type, destination, dateFrom, dateTo, offers, basePrice} = point;
+  const {type, cityName, descriptionText, dateFrom, dateTo, offers, basePrice, pictures} = point;
 
   const dateStart = humanizeFormDate(dateFrom);
   const dateEnd = humanizeFormDate(dateTo);
 
   const checked = offers.includes(offers.id) ? 'checked' : '';
 
-  const descriptionText = destination.description;
-  const pictures = destination.pictures;
-
-  const cityName = destination.cityName;
   return (`<li class="trip-events__item">
     <form class="event event--edit" action="#" method="post">
     <header class="event__header">
@@ -58,7 +54,10 @@ const createEditFormTemplate = (point) => {
       </div>
 
       <button class="event__save-btn  btn  btn--blue" type="submit">Save</button>
-      <button class="event__reset-btn" type="reset">Cancel</button>
+      <button class="event__reset-btn" type="reset">Delete</button>
+      <button class="event__rollup-btn" type="button">
+        <span class="visually-hidden">Open event</span>
+      </button>
     </header>
     <section class="event__details">
 
@@ -110,23 +109,33 @@ export default class EditFormView extends AbstractView {
     return createEditFormTemplate(this.#point);
   }
 
-  setFormSubmitHandler = (callback) => {
-    this._callback.formSubmit = callback;
-    this.element.querySelector('form').addEventListener('submit', this.#formSubmitHandler);
+  // setFormSubmitHandler = (callback) => {
+  //   this._callback.formSubmit = callback;
+  //   this.element.querySelector('form').addEventListener('submit', this.#formSubmitHandler);
+  // };
+
+  // #formSubmitHandler = (evt) => {
+  //   evt.preventDefault();
+  //   this._callback.formSubmit();
+  // };
+
+  // setFormResetHandler = (callback) => {
+  //   this._callback.formReset = callback;
+  //   this.element.querySelector('form').addEventListener('reset', this.#formResetHandler);
+  // };
+
+  // #formResetHandler = (evt) => {
+  //   evt.preventDefault();
+  //   this._callback.formReset();
+  // };
+
+  setRollupHandler = (callback) => {
+    this._callback.rollup = callback;
+    this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#rollupHandler);
   };
 
-  #formSubmitHandler = (evt) => {
+  #rollupHandler = (evt) => {
     evt.preventDefault();
-    this._callback.formSubmit();
-  };
-
-  setFormResetHandler = (callback) => {
-    this._callback.formReset = callback;
-    this.element.querySelector('form').addEventListener('reset', this.#formResetHandler);
-  };
-
-  #formResetHandler = (evt) => {
-    evt.preventDefault();
-    this._callback.formReset();
+    this._callback.rollup();
   };
 }
