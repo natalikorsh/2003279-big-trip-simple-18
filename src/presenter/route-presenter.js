@@ -4,7 +4,9 @@ import LoadingView from '../view/loading-view.js';
 import FilterView from '../view/filter-view.js';
 import { render, RenderPosition } from '../framework/render.js';
 import PointPresenter from './point-presenter.js';
-import { updateItem } from '../utils/utils.js';
+import { updateItem, sortByDay, sortByPrice } from '../utils/utils.js';
+import { SortType } from '../const.js';
+
 
 export default class RoutePresenter {
   #routeContainer = null;
@@ -17,7 +19,9 @@ export default class RoutePresenter {
   #routePointsList = new CreateListView();
 
   #routePoints = [];
+  #backupRoutePoints = [];
   #pointPresenter = new Map();
+  #currentSortType = SortType.DEFAULT;
 
 
   constructor(routeContainer, pointsModel, routeFilterContainer) {
@@ -28,6 +32,7 @@ export default class RoutePresenter {
 
   init = () => {
     this.#routePoints = [...this.#pointsModel.points];
+    this.#backupRoutePoints = [...this.#pointsModel.points];
 
     this.#renderRoute();
   };
@@ -38,15 +43,42 @@ export default class RoutePresenter {
 
   #handlePointChange = (updatedPoint) => {
     this.#routePoints = updateItem(this.#routePoints, updatedPoint);
+    this.#backupRoutePoints = updateItem(this.#backupRoutePoints, updatedPoint);
     this.#pointPresenter.get(updatedPoint.id).init(updatedPoint);
   };
+
+  #sortPoints = (sortType) => {
+    switch (sortType) {
+      case SortType.SORT_DAY:
+        this.#routePoints.sort(sortByDay);
+        break;
+      case SortType.SORT_PRICE:
+        this.#routePoints.sort(sortByPrice);
+        break;
+      case SortType.DEFAULT:
+        this.#routePoints = [...this.#backupRoutePoints];
+    }
+
+    this.#currentSortType = sortType;
+  }
 
   #handleModeChange = () => {
     this.#pointPresenter.forEach((presenter) => presenter.resetView());
   };
 
+  #handleSortTypeChange = (sortType) => {
+    if (this.#currentSortType === sortType) {
+      return;
+    }
+
+    this.#sortPoints(sortType);
+    this.#clearPointsList();
+    this.#renderPointsList();
+  }
+
   #renderSort = () => {
-    render(this.#routeSortComponent, this.#routeContainer, RenderPosition.AFTERBEGIN);
+    render(this.#routeSortComponent, this.#routeContainer, RenderPosition.BEFOREEND);
+    this.#routeSortComponent.setSortTypeChangeHandler(this.#handleSortTypeChange);
   };
 
   #renderPoint = (point) => {
