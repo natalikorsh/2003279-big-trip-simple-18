@@ -60,7 +60,7 @@ export default class RoutePresenter {
     }
 
     this.#currentSortType = sortType;
-  }
+  };
 
   #handleModeChange = () => {
     this.#pointPresenter.forEach((presenter) => presenter.resetView());
@@ -74,7 +74,7 @@ export default class RoutePresenter {
     this.#sortPoints(sortType);
     this.#clearPointsList();
     this.#renderPointsList();
-  }
+  };
 
   #renderSort = () => {
     render(this.#routeSortComponent, this.#routeContainer, RenderPosition.BEFOREEND);

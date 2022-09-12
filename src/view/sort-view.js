@@ -42,6 +42,6 @@ export default class SortView extends AbstractView {
 
   #sortTypeChangeHandler = (evt) => {
     this._callback.sortTypeChange(evt.target.value.sortType);
-  }
+  };
 }
 
