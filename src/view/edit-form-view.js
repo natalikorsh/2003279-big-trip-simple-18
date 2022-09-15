@@ -7,17 +7,17 @@ import 'flatpickr/dist/flatpickr.min.css';
 
 const createRouteTypesList = (routeTypes) => (
   `<div class="event__type-list">
-    <fieldset class="event__type-group">
-      <legend class="visually-hidden">Event type</legend>
+  <fieldset class="event__type-group">
+    <legend class="visually-hidden">Event type</legend>
 
-      ${routeTypes.map(routeType => {
-        return `<div class="event__type-item">
-        <input id="event-type-${routeType}-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="${routeType}">
-        <label class="event__type-label  event__type-label--${routeType}" for="event-type-${routeType}-1">${routeType[0].toUpperCase()}${routeType.slice(1)}</label>
-      </div>`}).join(' ')}
+    ${routeTypes.map((routeType) =>
+    `<div class="event__type-item">
+      <input id="event-type-${routeType}-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="${routeType}">
+      <label class="event__type-label  event__type-label--${routeType}" for="event-type-${routeType}-1">${routeType[0].toUpperCase()}${routeType.slice(1)}</label>
+    </div>`).join(' ')}
 
-    </fieldset>
-  </div>`
+  </fieldset>
+</div>`
 );
 
 const createDestinationTemplate = (type, cityName, cityNames) => (
@@ -27,55 +27,55 @@ const createDestinationTemplate = (type, cityName, cityNames) => (
     </label>
     <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="${cityName}" list="destination-list-1">
     <datalist id="destination-list-1">
-    ${cityNames.map(city => {
-      return `<option value="${city[0].toUpperCase()}${city.slice(1)}" data-city-name="${city}"></option>`
-    }).join('')}
-
+    ${cityNames.map((city) =>
+    `<option value="${city[0].toUpperCase()}${city.slice(1)}" data-city-name="${city}"></option>`).join('')}
     </datalist>
   </div>`
 );
 
 const createOffersTemplate = (offersByType, type) => {
-  const offers = offersByType.find((offers) => offers.type === type).offers;
+  const offers = offersByType.find((offer) => offer.type === type).offers;
 
   return (
-  `<section class="event__section  event__section--offers">
-    <h3 class="event__section-title  event__section-title--offers">Offers</h3>
+    `<section class="event__section  event__section--offers">
+      <h3 class="event__section-title  event__section-title--offers">Offers</h3>
 
-    <div class="event__available-offers">
-    ${offers.map(({title, price, id}) => {
-    const offerNameArray = title.split(' ');
-    const offerName = offerNameArray.pop();
-    const checked = offers.includes(offers.id) ? 'checked' : '';
+      <div class="event__available-offers">
+      ${offers.map(({title, price, id}) => {
+      const offerNameArray = title.split(' ');
+      const offerName = offerNameArray.pop();
+      const checked = offers.includes(offers.id) ? 'checked' : '';
 
-    return `<div class="event__offer-selector">
-      <input class="event__offer-checkbox  visually-hidden" id="event-offer-${offerName}-${id}" type="checkbox" name="event-offer-${offerName}" ${checked}>
-      <label class="event__offer-label" for="event-offer-${offerName}-${id}">
-        <span class="event__offer-title">${title}</span>
-        &plus;&euro;&nbsp;
-        <span class="event__offer-price">${price}</span>
-      </label>
-      </div>`}).join('')}
+      return `<div class="event__offer-selector">
+        <input class="event__offer-checkbox  visually-hidden" id="event-offer-${offerName}-${id}" type="checkbox" name="event-offer-${offerName}" ${checked}>
+        <label class="event__offer-label" for="event-offer-${offerName}-${id}">
+          <span class="event__offer-title">${title}</span>
+          &plus;&euro;&nbsp;
+          <span class="event__offer-price">${price}</span>
+        </label>
+        </div>`;}).join('')}
 
-    </div>
-  </section>`
-)};
+      </div>
+    </section>`
+  );
+};
 
 const createDescriptionTemplate = (destinations, city) => {
-  const destination = destinations.find((destination) => destination.cityName === city);
-  const { description, pictures } = destination;
-return (
-  `<section class="event__section  event__section--destination">
+  const currentDestination = destinations.find((destination) => destination.cityName === city);
+  const { description, pictures } = currentDestination;
+  return (
+    `<section class="event__section  event__section--destination">
         <h3 class="event__section-title  event__section-title--destination">Destination</h3>
         <p class="event__destination-description">${description}</p>
 
         <div class="event__photos-container">
           <div class="event__photos-tape">
-          ${pictures.map(({src, description}) => `<img class="event__photo" src="${src}" alt="${description}">`).join('')}
+          ${pictures.map(({src, altDescription}) => `<img class="event__photo" src="${src}" alt="${altDescription}">`).join('')}
           </div>
         </div>
       </section>`
-)};
+  );
+};
 
 const createEditFormTemplate = (data) => {
   const {type, cityName, destinations, dateFrom, dateTo, offers, basePrice} = data;
@@ -201,11 +201,11 @@ export default class EditFormView extends AbstractStatefulView {
 
   setChangeTypeHandler = () => {
     // навесить обработчик смены типа маршрута
-  }
+  };
 
   #changeTypeHandler = () => {
     // логика обработчика смены типа маршрута
-  }
+  };
 
   #setInnerHandlers = () => {
     this.element.querySelector('.event__type-group')

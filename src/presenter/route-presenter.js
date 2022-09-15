@@ -32,7 +32,7 @@ export default class RoutePresenter {
 
   init = () => {
     this.#routePoints = [...this.#pointsModel.points];
-    console.log(this.#routePoints);
+    // console.log(this.#routePoints);
     this.#backupRoutePoints = [...this.#pointsModel.points];
 
     this.#renderRoute();
