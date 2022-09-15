@@ -31,8 +31,8 @@ export default class PointPresenter {
     this.#pointEditForm = new EditFormView(point);
 
     this.#pointComponent.setPointExpandHandler(this.#expandHandler);
-    // this.#pointEditForm.setFormSubmitHandler(this.#formSubmitHandler);
-    // this.#pointEditForm.setFormResetHandler(this.#formResetHandler);
+    this.#pointEditForm.setFormSubmitHandler(this.#formSubmitHandler);
+    this.#pointEditForm.setFormResetHandler(this.#formResetHandler);
     this.#pointEditForm.setRollupHandler(this.#rollupHandler);
 
     if (prevPointComponent === null || prevPointEditForm === null) {
@@ -59,6 +59,7 @@ export default class PointPresenter {
 
   resetView = () => {
     if (this.#mode !== mode.DEFAULT) {
+      this.#pointEditForm.reset(this.#point);
       this.#replaceEditFormToPoint();
     }
   };
@@ -80,21 +81,25 @@ export default class PointPresenter {
     this.#replacePointToEditForm();
   };
 
-  // #formSubmitHandler = () => {
-  //   this.#replaceEditFormToPoint();
-  // };
+  #formSubmitHandler = () => {
 
-  // #formResetHandler = () => {
-  //   this.#replaceEditFormToPoint();
-  // };
+    this.#replaceEditFormToPoint();
+  };
+
+  #formResetHandler = () => {
+    this.#pointEditForm.reset(this.#point);
+    this.#replaceEditFormToPoint();
+  };
 
   #rollupHandler = () => {
+    this.#pointEditForm.reset(this.#point);
     this.#replaceEditFormToPoint();
   };
 
   #escKeyDownHandler = (evt) => {
     if (evt.key === 'Escape' || evt.key === 'Esc') {
       evt.preventDefault();
+      this.#pointEditForm.reset(this.#point);
       this.#replaceEditFormToPoint();
     }
   };

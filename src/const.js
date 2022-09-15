@@ -17,6 +17,12 @@ export const ROUTE_TYPES = [
 
 export const SortType = {
   DEFAULT: 'default',
-  DATE_UP: 'date-up',
-  PRICE_DOWN: 'price-down',
+  SORT_DAY: 'day',
+  SORT_PRICE: 'price',
 };
+
+export const CITY_NAMES = [
+  'chamonix',
+  'amsterdam',
+  'geneva',
+];

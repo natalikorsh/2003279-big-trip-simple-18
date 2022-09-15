@@ -34,6 +34,7 @@
     "node": "16"
   },
   "dependencies": {
-    "days": "^1.1.1"
+    "days": "^1.1.1",
+    "flatpickr": "^4.6.13"
   }
 }
