@@ -20,3 +20,9 @@ export const SortType = {
   SORT_DAY: 'day',
   SORT_PRICE: 'price',
 };
+
+export const CITY_NAMES = [
+  'chamonix',
+  'amsterdam',
+  'geneva',
+];

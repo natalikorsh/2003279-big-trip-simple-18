@@ -2,19 +2,19 @@ import { getRandomInteger } from '../utils/utils.js';
 import { ROUTE_TYPES } from '../const.js';
 import { nanoid } from 'nanoid';
 
-export const generateOffersByType = (type) => {
-  const offersByType = [
+
+const OFFERS_BY_TYPE = [
     {
       type: 'taxi',
       offers: [
         {
           id: 1,
-          title: 'Order Uber',
+          title: 'Order uber',
           price: 20,
         },
         {
-          id: 1,
-          title: 'Order Uber',
+          id: 2,
+          title: 'Order uber',
           price: 20,
         }
       ]
@@ -24,12 +24,12 @@ export const generateOffersByType = (type) => {
       offers: [
         {
           id: 1,
-          title: 'Order Uber',
+          title: 'Order uber',
           price: 20,
         },
         {
-          id: 1,
-          title: 'Order Uber',
+          id: 2,
+          title: 'Order uber',
           price: 20,
         }
       ]
@@ -39,12 +39,12 @@ export const generateOffersByType = (type) => {
       offers: [
         {
           id: 1,
-          title: 'Order Uber',
+          title: 'Order uber',
           price: 20,
         },
         {
-          id: 1,
-          title: 'Order Uber',
+          id: 2,
+          title: 'Order uber',
           price: 20,
         }
       ]
@@ -54,12 +54,12 @@ export const generateOffersByType = (type) => {
       offers: [
         {
           id: 1,
-          title: 'Order Uber',
+          title: 'Order uber',
           price: 20,
         },
         {
-          id: 1,
-          title: 'Order Uber',
+          id: 2,
+          title: 'Order uber',
           price: 20,
         }
       ]
@@ -69,12 +69,12 @@ export const generateOffersByType = (type) => {
       offers: [
         {
           id: 1,
-          title: 'Order Uber',
+          title: 'Order uber',
           price: 20,
         },
         {
-          id: 1,
-          title: 'Order Uber',
+          id: 2,
+          title: 'Order uber',
           price: 20,
         }
       ]
@@ -84,12 +84,12 @@ export const generateOffersByType = (type) => {
       offers: [
         {
           id: 1,
-          title: 'Order Uber',
+          title: 'Order uber',
           price: 20,
         },
         {
-          id: 1,
-          title: 'Order Uber',
+          id: 2,
+          title: 'Order uber',
           price: 20,
         }
       ]
@@ -99,12 +99,12 @@ export const generateOffersByType = (type) => {
       offers: [
         {
           id: 1,
-          title: 'Order Uber',
+          title: 'Order uber',
           price: 20,
         },
         {
-          id: 1,
-          title: 'Order Uber',
+          id: 2,
+          title: 'Order uber',
           price: 20,
         }
       ]
@@ -114,12 +114,12 @@ export const generateOffersByType = (type) => {
       offers: [
         {
           id: 1,
-          title: 'Order Uber',
+          title: 'Order uber',
           price: 20,
         },
         {
-          id: 1,
-          title: 'Order Uber',
+          id: 2,
+          title: 'Order uber',
           price: 20,
         }
       ]
@@ -156,71 +156,82 @@ export const generateOffersByType = (type) => {
     },
   ];
 
-  return offersByType.find((offers) => offers.type === type).offers;
-
-};
-
-const generateDestinationById = (id) => {
-  const destinations = [
+const DESTINATIONS = [
     {
       id: 1,
       cityName: 'Chamonix',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet varius magna, non porta ligula feugiat eget. Fusce tristique felis at fermentum pharetra. Aliquam id orci ut lectus varius viverra.',
+      description: 'Chamonix-Mont-Blanc, more commonly known as Chamonix,[b][c] is a commune in the Haute-Savoie department in the Auvergne-Rhône-Alpes region of southeastern France. It was the site of the first Winter Olympics in 1924. In 2017, it had a population of 8,611.',
       pictures: [
         {
-          'src': 'http://picsum.photos/300/200?r=0.093756202',
+          'src': 'http://picsum.photos/300/200?r=0.09111112',
           'description': 'Chamonix parliament building'
         },
         {
-          'src': 'http://picsum.photos/300/200?r=0.093356202',
+          'src': 'http://picsum.photos/300/200?r=0.09322202',
           'description': 'Chamonix parliament building'
         },
         {
-          'src': 'http://picsum.photos/300/200?r=0.099378939202',
+          'src': 'http://picsum.photos/300/200?r=0.09333202',
           'description': 'Chamonix parliament building'
         },
         {
-          'src': 'http://picsum.photos/300/200?r=0.093773890202',
+          'src': 'http://picsum.photos/300/200?r=0.444444202',
           'description': 'Chamonix parliament building'
         },
         {
-          'src': 'http://picsum.photos/300/200?r=0.093226202',
+          'src': 'http://picsum.photos/300/200?r=0.0944442',
           'description': 'Chamonix parliament building'
         },
       ]
     },
     {
-      id: nanoid(),
-      cityName: 'Chamonix',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet varius magna, non porta ligula feugiat eget. Fusce tristique felis at fermentum pharetra. Aliquam id orci ut lectus varius viverra.',
+      id: 2,
+      cityName: 'Geneva',
+      description: 'Geneva is the second-most populous city in Switzerland (after Zürich) and the most populous city of Romandy, the French-speaking part of Switzerland. Situated in the south west of the country, where the Rhône exits Lake Geneva, it is the capital of the Republic and Canton of Geneva.',
       pictures: [
         {
-          'src': 'http://picsum.photos/300/200?r=0.093756202',
+          'src': 'http://picsum.photos/300/200?r=0.088856202',
           'description': 'Chamonix parliament building'
         },
         {
-          'src': 'http://picsum.photos/300/200?r=0.093356202',
+          'src': 'http://picsum.photos/300/200?r=0.077772',
           'description': 'Chamonix parliament building'
         },
         {
-          'src': 'http://picsum.photos/300/200?r=0.099378939202',
+          'src': 'http://picsum.photos/300/200?r=0.099388939202',
+          'description': 'Chamonix parliament building'
+        },
+      ]
+    },
+    {
+      id: 3,
+      cityName: 'Amsterdam',
+      description: 'Amsterdam is the capital and most populous city of the Netherlands; with a population of 907,976 within the city proper, 1,558,755 in the urban area and 2,480,394 in the metropolitan area. Found within the Dutch province of North Holland, Amsterdam is colloquially referred to as the "Venice of the North", due to the large number of canals which form a UNESCO World Heritage Site.',
+      pictures: [
+        {
+          'src': 'http://picsum.photos/300/200?r=0.093756123',
           'description': 'Chamonix parliament building'
         },
         {
-          'src': 'http://picsum.photos/300/200?r=0.093773890202',
+          'src': 'http://picsum.photos/300/200?r=0.0933111',
           'description': 'Chamonix parliament building'
         },
         {
-          'src': 'http://picsum.photos/300/200?r=0.093226202',
+          'src': 'http://picsum.photos/300/200?r=0.0993789392222',
+          'description': 'Chamonix parliament building'
+        },
+        {
+          'src': 'http://picsum.photos/300/200?r=0.0937738555',
           'description': 'Chamonix parliament building'
         },
       ]
     },
   ];
 
-  return destinations.find((destination) => destination.id === id);
-};
-
+const generateCity = () => {
+  const randomIndex = getRandomInteger(0, DESTINATIONS.length - 1);
+  return DESTINATIONS[randomIndex].cityName;
+}
 // const generateDate = () => {
 //   const isDate = Boolean(getRandomInteger(0, 1));
 //   if (!isDate) {
@@ -238,23 +249,21 @@ const generateType = () => {
 };
 
 export const generatePoint = () => {
-  const id = 1;
+  const cityName = generateCity();
   const type = generateType();
-  const destination = generateDestinationById(id);
-  const dateFrom = 11111;
-  const dateTo = 22222;
+  const dateFrom = '2017-02-26T19:40:03.243Z';
+  const dateTo = '2017-02-27T01:25:03.243Z';
   const basePrice = getRandomInteger(1, 9) * 100;
-  const offers = generateOffersByType(type);
+  const offers = OFFERS_BY_TYPE;
+  const destinations = DESTINATIONS;
 
   return {
-    id: nanoid(),
     type,
-    descriptionText: destination.description,
     dateFrom,
     dateTo,
     basePrice,
     offers,
-    cityName: destination.cityName,
-    pictures: destination.pictures
+    destinations,
+    cityName
   };
 };

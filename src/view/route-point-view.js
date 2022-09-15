@@ -10,6 +10,7 @@ const createRoutePointTemplate = (point) => {
   const dateForRobots = robotizeDate(dateFrom);
   const startDateAndTimeForRobots = robotizeDateAndTime(dateFrom);
   const endDateAndTimeForRobots = robotizeDateAndTime(dateTo);
+  const currentOffers = offers.find((offer) => offer.type === type).offers;
 
   return (
     `<li class="trip-events__item">
@@ -33,7 +34,7 @@ const createRoutePointTemplate = (point) => {
 
         <ul class="event__selected-offers">
 
-          ${offers.map(({title, price}) => `<li class="event__offer">
+          ${currentOffers.map(({title, price}) => `<li class="event__offer">
               <span class="event__offer-title">${title}</span>
               &plus;&euro;&nbsp;
               <span class="event__offer-price">${price}</span>
