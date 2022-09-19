@@ -42,9 +42,7 @@ const updateItem = (items, update) => {
 //   return null;
 // };
 
-const sortByDay = (pointA, pointB) => {
-  return dayjs(pointA.dateFrom).diff(dayjs(pointB.dateFrom));
-};
+const sortByDay = (pointA, pointB) => dayjs(pointA.dateFrom).diff(dayjs(pointB.dateFrom));
 
 const sortByPrice = (pointA, pointB) => pointA.basePrice - pointB.basePrice;
 
