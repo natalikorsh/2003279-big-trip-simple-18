@@ -1,7 +1,6 @@
-import { ROUTE_TYPES } from '../const.js';
+import { ROUTE_TYPES, CITY_NAMES } from '../const.js';
 import AbstractStatefulView from '../framework/view/abstract-stateful-view.js';
 import { humanizeFormDate } from '../utils/utils.js';
-import { CITY_NAMES } from '../const.js';
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 
