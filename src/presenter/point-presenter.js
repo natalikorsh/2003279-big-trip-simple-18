@@ -40,6 +40,14 @@ export default class PointPresenter {
       return;
     }
 
+    // if (this.#routePointsContainer.contains(prevPointComponent.element)) {
+    //   replace(this.#pointComponent, prevPointComponent);
+    // }
+
+    // if (this.#routePointsContainer.contains(prevPointEditForm.element)) {
+    //   replace(this.#pointEditForm, prevPointEditForm);
+    // }
+
     if (this.#mode === mode.DEFAULT) {
       replace(this.#pointComponent, prevPointComponent);
     }

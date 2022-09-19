@@ -18,7 +18,7 @@ export const ROUTE_TYPES = [
 export const SortType = {
   DEFAULT: 'default',
   SORT_DAY: 'day',
-  SORT_PRICE: 'price',
+  SORT_PRICE: 'sort-price',
 };
 
 export const CITY_NAMES = [
