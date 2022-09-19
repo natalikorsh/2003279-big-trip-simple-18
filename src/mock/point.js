@@ -1,5 +1,6 @@
 import { getRandomInteger } from '../utils/utils.js';
 import { ROUTE_TYPES } from '../const.js';
+import { nanoid } from 'nanoid';
 
 const OFFERS_BY_TYPE = [
   {
@@ -246,6 +247,7 @@ export const generatePoint = () => {
   const destinations = DESTINATIONS;
 
   return {
+    id: nanoid(),
     type,
     dateFrom,
     dateTo,

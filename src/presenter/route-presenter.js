@@ -56,7 +56,7 @@ export default class RoutePresenter {
       case SortType.SORT_PRICE:
         this.#routePoints.sort(sortByPrice);
         break;
-      case SortType.DEFAULT:
+      default:
         this.#routePoints = [...this.#backupRoutePoints];
     }
 
