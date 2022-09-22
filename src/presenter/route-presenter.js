@@ -1,7 +1,6 @@
 import CreateListView from '../view/create-list-view.js';
 import SortView from '../view/sort-view.js';
 import LoadingView from '../view/loading-view.js';
-import FilterView from '../view/filter-view.js';
 import { render, RenderPosition, remove } from '../framework/render.js';
 import PointPresenter from './point-presenter.js';
 import { sortByDay, sortByPrice, filterPoints } from '../utils/utils.js';
@@ -11,32 +10,32 @@ import { SortType, UserAction, UpdateType, FilterType } from '../const.js';
 export default class RoutePresenter {
   #routeContainer = null;
   #pointsModel = null;
-  #routeFilterContainer = null;
   #routeSortComponent = null;
-  #filterComponent = null;
+  #filterModel = null;
 
   #loadingView = new LoadingView();
   #routePointsList = new CreateListView();
 
   #pointPresenter = new Map();
   #currentSortType = SortType.DEFAULT;
-  #currentFilterType = FilterType.EVERYTHING;
 
-  constructor(routeContainer, pointsModel, routeFilterContainer) {
+  constructor(routeContainer, pointsModel, filterModel) {
     this.#routeContainer = routeContainer;
     this.#pointsModel = pointsModel;
-    this.#routeFilterContainer = routeFilterContainer;
+    this.#filterModel = filterModel;
 
     this.#pointsModel.addObserver(this.#handleModelEvent);
+    this.#filterModel.addObserver(this.#handleModelEvent);
   }
 
   get points() {
+    const filterType = this.#filterModel.filter;
     const points = this.#pointsModel.points;
-    const filteredPoints = filterPoints(this.#currentFilterType, points);
+    const filteredPoints = filterPoints(filterType, points);
 
     switch (this.#currentSortType) {
       case SortType.DEFAULT:
-        return points;
+        return filteredPoints;
       case SortType.SORT_DAY:
         return filteredPoints.sort(sortByDay);
       case SortType.SORT_PRICE:
@@ -49,10 +48,6 @@ export default class RoutePresenter {
   init = () => {
     this.#renderRoute();
   };
-
-  // #handlePointChange = (updatedPoint) => {
-  //   this.#pointPresenter.get(updatedPoint.id).init(updatedPoint);
-  // };
 
   #handleModeChange = () => {
     this.#pointPresenter.forEach((presenter) => presenter.resetView());
@@ -102,23 +97,6 @@ export default class RoutePresenter {
     this.#renderRoute();
   };
 
-  #renderFilters = () => {
-    this.#filterComponent = new FilterView(this.#currentFilterType);
-    this.#filterComponent.setFilterTypeChangeHandler(this.#handleFilterTypeChange);
-
-    render(this.#filterComponent, this.#routeFilterContainer, RenderPosition.BEFOREEND);
-  };
-
-  #handleFilterTypeChange = (filterType) => {
-    if (this.#currentFilterType === filterType) {
-      return;
-    }
-
-    this.#currentFilterType = filterType;
-    this.#clearRoute();
-    this.#renderRoute();
-  }
-
   #renderPoint = (point) => {
     const pointPresenter = new PointPresenter(this.#routePointsList.element, this.#handleViewAction, this.#handleModeChange);
     pointPresenter.init(point);
@@ -133,7 +111,6 @@ export default class RoutePresenter {
     this.#pointPresenter.forEach((presenter) => presenter.destroy());
     this.#pointPresenter.clear();
 
-    remove(this.#filterComponent);
     remove(this.#routeSortComponent);
     remove(this.#loadingView);
   }
@@ -150,7 +127,6 @@ export default class RoutePresenter {
       return;
     }
 
-    this.#renderFilters();
     this.#renderSort();
     render(this.#routePointsList, this.#routeContainer);
     this.#renderPoints(points);

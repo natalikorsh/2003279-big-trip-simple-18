@@ -20,12 +20,6 @@ export const isPriceEqual = (priceA, priceB) => priceA === priceB;
 export const sortByDay = (pointA, pointB) => dayjs(pointA.dateFrom).diff(dayjs(pointB.dateFrom));
 export const sortByPrice = (pointA, pointB) => pointB.basePrice - pointA.basePrice;
 
-// export const filter = {
-//   [FilterType.EVERYTHING]: (points) => points,
-//   [FilterType.FUTURE]: (points) => points.filter(
-//     (point) => point.dateFrom && dayjs(point.dateFrom).isAfter(new Date())),
-// }
-
 export const filterPoints = (filterType, points) => {
   switch (filterType) {
     case FilterType.EVERYTHING:
