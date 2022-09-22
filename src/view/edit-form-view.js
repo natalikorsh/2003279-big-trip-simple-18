@@ -169,22 +169,12 @@ export default class EditFormView extends AbstractStatefulView {
 
   setFormSubmitHandler = (callback) => {
     this._callback.formSubmit = callback;
-    this.element.querySelector('form').addEventListener('submit', this.#formSubmitHandler);
+    this.element.querySelector('.event__save-btn').addEventListener('click', this.#formSubmitHandler);
   };
 
   #formSubmitHandler = (evt) => {
     evt.preventDefault();
     this._callback.formSubmit(EditFormView.parseStateToForm(this._state));
-  };
-
-  setFormResetHandler = (callback) => {
-    this._callback.formReset = callback;
-    this.element.querySelector('form').addEventListener('reset', this.#formResetHandler);
-  };
-
-  #formResetHandler = (evt) => {
-    evt.preventDefault();
-    this._callback.formReset();
   };
 
   setRollupHandler = (callback) => {
@@ -197,20 +187,13 @@ export default class EditFormView extends AbstractStatefulView {
     this._callback.rollup();
   };
 
-
-  setChangeTypeHandler = () => {
-    // навесить обработчик смены типа маршрута
-  };
-
-  #changeTypeHandler = () => {
-    // логика обработчика смены типа маршрута
-  };
-
   #setInnerHandlers = () => {
     this.element.querySelector('.event__type-group')
       .addEventListener('change', this.#typeHandler);
     this.element.querySelector('.event__input--destination')
       .addEventListener('change', this.#cityNameHandler);
+    this.element.querySelector('.event__input--price')
+      .addEventListener('change', this.#priceHandler);
   };
 
   #typeHandler = (evt) => {
@@ -222,6 +205,12 @@ export default class EditFormView extends AbstractStatefulView {
   #cityNameHandler = (evt) => {
     this.updateElement({
       cityName: evt.target.value,
+    });
+  };
+
+  #priceHandler = (evt) => {
+    this.updateElement({
+      basePrice: evt.target.value,
     });
   };
 
@@ -241,6 +230,7 @@ export default class EditFormView extends AbstractStatefulView {
     this.#datepicker = flatpickr(
       this.element.querySelector('[name="event-start-time"]'),
       {
+        enableTime: true,
         dateFormat: 'd/m/y H:i',
         defaultDate: this._state.dateFrom,
         onChange: this.#dateStartChangeHandler,
@@ -252,6 +242,7 @@ export default class EditFormView extends AbstractStatefulView {
     this.#datepicker = flatpickr(
       this.element.querySelector('[name="event-end-time"]'),
       {
+        enableTime: true,
         dateFormat: 'd/m/y H:i',
         defaultDate: this._state.dateTo,
         onChange: this.#dateEndChangeHandler,
@@ -259,13 +250,23 @@ export default class EditFormView extends AbstractStatefulView {
     );
   };
 
+  setDeleteClickHandler = (callback) => {
+    this._callback.deleteClick = callback;
+    this.element.querySelector('.event__reset-btn').addEventListener('click', this.#deleteClickHandler);
+  };
+
+  #deleteClickHandler = (evt) => {
+    evt.preventDefault();
+    this._callback.deleteClick(EditFormView.parseStateToForm(this._state));
+  };
+
   _restoreHandlers = () => {
     this.#setInnerHandlers();
-    this.setFormSubmitHandler(this._callback.formSubmit);
-    this.setFormResetHandler(this._callback.formReset);
-    this.setRollupHandler(this._callback.rollup);
     this.#setDatepickerStartDate();
     this.#setDatepickerEndDate();
+    this.setFormSubmitHandler(this._callback.formSubmit);
+    this.setRollupHandler(this._callback.rollup);
+    this.setDeleteClickHandler(this._callback.deleteClick);
   };
 
   static parseFormToState = (point) => ({

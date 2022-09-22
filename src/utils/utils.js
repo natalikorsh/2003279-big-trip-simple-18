@@ -1,50 +1,40 @@
 import dayjs from 'dayjs';
+import { FilterType } from '../const';
 
-const getRandomInteger = (a = 0, b = 1) => {
+export const getRandomInteger = (a = 0, b = 1) => {
   const lower = Math.ceil(Math.min(a, b));
   const upper = Math.floor(Math.max(a, b));
 
   return Math.floor(lower + Math.random() * (upper - lower + 1));
 };
 
-const humanizeFormDate = (date) => dayjs(date).format('DD/MM/YYYY HH:mm');
-const humanizePointDate = (date) => dayjs(date).format('MMM D');
-const humanizePointTime = (date) => dayjs(date).format('HH:mm');
-const robotizeDate = (date) => dayjs(date).format('YYYY-MM-DD');
-const robotizeDateAndTime = (date) => dayjs(date).format('YYYY-MM-DDTHH:mm');
+export const humanizeFormDate = (date) => dayjs(date).format('DD/MM/YYYY HH:mm');
+export const humanizePointDate = (date) => dayjs(date).format('MMM D');
+export const humanizePointTime = (date) => dayjs(date).format('HH:mm');
+export const robotizeDate = (date) => dayjs(date).format('YYYY-MM-DD');
+export const robotizeDateAndTime = (date) => dayjs(date).format('YYYY-MM-DDTHH:mm');
 
-const updateItem = (items, update) => {
-  const index = items.findIndex((item) => item.id === update.id);
-  if (index === -1) {
-    return items;
-  }
+export const isDatesEqual = (dateA, dateB) => dayjs(dateA).isSame(dateB, 'D');
+export const isPriceEqual = (priceA, priceB) => priceA === priceB;
 
-  return [
-    ...items.slice(0, index),
-    update,
-    ...items.slice(index + 1),
-  ];
+export const sortByDay = (pointA, pointB) => dayjs(pointA.dateFrom).diff(dayjs(pointB.dateFrom));
+export const sortByPrice = (pointA, pointB) => pointB.basePrice - pointA.basePrice;
+
+// export const filter = {
+//   [FilterType.EVERYTHING]: (points) => points,
+//   [FilterType.FUTURE]: (points) => points.filter(
+//     (point) => point.dateFrom && dayjs(point.dateFrom).isAfter(new Date())),
+// }
+
+export const filterPoints = (filterType, points) => {
+  switch (filterType) {
+    case FilterType.EVERYTHING:
+      return points;
+      break;
+    case FilterType.FUTURE:
+      return points.filter((point) =>
+      Date.parse(point.dateFrom) > Date.now());
+      break;
+  };
 };
-
-// const getWeightForDate = (dateA, dateB) => {
-//   if (dateA === null && dateB === null) {
-//     return 0;
-//   }
-
-//   if (dateA === null) {
-//     return 1;
-//   }
-
-//   if (dateB === null) {
-//     return -1;
-//   }
-
-//   return null;
-// };
-
-const sortByDay = (pointA, pointB) => dayjs(pointA.dateFrom).diff(dayjs(pointB.dateFrom));
-
-const sortByPrice = (pointA, pointB) => pointA.basePrice - pointB.basePrice;
-
-export {getRandomInteger, humanizeFormDate, humanizePointDate, humanizePointTime, robotizeDate, robotizeDateAndTime, updateItem, sortByDay, sortByPrice};
 

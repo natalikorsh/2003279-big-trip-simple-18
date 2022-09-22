@@ -1,6 +1,8 @@
 import { render, replace, remove } from '../framework/render.js';
 import RoutePointView from '../view/route-point-view.js';
 import EditFormView from '../view/edit-form-view.js';
+import { UserAction, UpdateType } from '../const.js';
+import { isDatesEqual, isPriceEqual } from '../utils/utils.js';
 
 const mode = {
   DEFAULT: 'DEFAULT',
@@ -12,13 +14,15 @@ export default class PointPresenter {
   #pointComponent = null;
   #pointEditForm = null;
   #changeMode = null;
+  #changeData = null;
 
   #point = null;
   #mode = mode.DEFAULT;
 
-  constructor(routePointsContainer, changeMode) {
+  constructor(routePointsContainer, changeData, changeMode) {
     this.#routePointsContainer = routePointsContainer;
     this.#changeMode = changeMode;
+    this.#changeData = changeData;
   }
 
   init = (point) => {
@@ -31,8 +35,8 @@ export default class PointPresenter {
     this.#pointEditForm = new EditFormView(point);
 
     this.#pointComponent.setPointExpandHandler(this.#expandHandler);
-    this.#pointEditForm.setFormSubmitHandler(this.#formSubmitHandler);
-    this.#pointEditForm.setFormResetHandler(this.#formResetHandler);
+    this.#pointEditForm.setFormSubmitHandler(this.#handleFormSubmit);
+    this.#pointEditForm.setDeleteClickHandler(this.#handleDeleteClick);
     this.#pointEditForm.setRollupHandler(this.#rollupHandler);
 
     if (prevPointComponent === null || prevPointEditForm === null) {
@@ -89,14 +93,25 @@ export default class PointPresenter {
     this.#replacePointToEditForm();
   };
 
-  #formSubmitHandler = () => {
+  #handleFormSubmit = (update) => {
+    const isMinorUpdate =
+      !isDatesEqual(this.#point.dateFrom, update.dateFrom) ||
+      !isPriceEqual(this.#point.basePrice, update.basePrice);
 
+    this.#changeData(
+      UserAction.UPDATE_POINT,
+      isMinorUpdate ? UpdateType.MINOR : UpdateType.PATCH,
+      update,
+    );
     this.#replaceEditFormToPoint();
   };
 
-  #formResetHandler = () => {
-    this.#pointEditForm.reset(this.#point);
-    this.#replaceEditFormToPoint();
+  #handleDeleteClick = (point) => {
+    this.#changeData(
+      UserAction.DELETE_POINT,
+      UpdateType.MINOR,
+      point,
+    );
   };
 
   #rollupHandler = () => {
